@@ -31,7 +31,7 @@ export default function AdminDashboard() {
   }, []);
 
   const handleSendLink = async (order: any) => {
-    const driveLink = prompt(\`Enter the Google Drive link for \${order.course_title}:\`);
+    const driveLink = prompt(`Enter the Google Drive link for ${order.course_title}:`);
     if (!driveLink) return;
 
     setActionLoading(true);

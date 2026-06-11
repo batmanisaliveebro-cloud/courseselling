@@ -96,7 +96,7 @@ export default function Checkout() {
           // Save the real order to Supabase
           try {
             const { error: dbError } = await supabase.from('orders').insert([{
-              id: \`ORD-\${Date.now()}\`,
+              id: `ORD-${Date.now()}`,
               user_email: user.email,
               course_id: courseId,
               course_title: course.title,
