@@ -50,13 +50,13 @@ export default function Dashboard() {
                     </a>
                   )}
                 </div>
-                
-                    <div>
-                      <strong>Access Granted</strong>
-                      <p>Please check your registered Gmail inbox for the Google Drive link.</p>
-                    </div>
+                <div className={styles.statusDelivered}>
+                  <CheckCircle size={20} />
+                  <div>
+                    <strong>Access Granted</strong>
+                    <p>Please check your registered Gmail inbox for the Google Drive link.</p>
                   </div>
-                )}
+                </div>
               </div>
             ))}
           </div>
