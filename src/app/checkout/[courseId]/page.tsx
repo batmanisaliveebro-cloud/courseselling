@@ -93,6 +93,21 @@ export default function Checkout() {
         if (result.paymentDetails) {
           // 4. Secure Payment Completed
           
+          // Save the real order to Supabase
+          try {
+            const { error: dbError } = await supabase.from('orders').insert([{
+              id: \`ORD-\${Date.now()}\`,
+              user_email: user.email,
+              course_id: courseId,
+              course_title: course.title,
+              price: course.price,
+              status: 'PENDING'
+            }]);
+            if (dbError) console.error("Database insert error:", dbError);
+          } catch (dbErr) {
+            console.error("Database exception:", dbErr);
+          }
+
           // 5. Send Automated Receipt Email
           try {
             await fetch('/api/send-receipt', {
