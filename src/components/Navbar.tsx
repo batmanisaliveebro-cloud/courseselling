@@ -20,8 +20,14 @@ export default function Navbar() {
 
     checkUser();
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       setUser(session?.user || null);
+      
+      // Security measure: Clear the access_token from the URL hash after a successful login
+      if (event === 'SIGNED_IN' && window.location.hash.includes('access_token')) {
+        // Replace the current URL in the browser history without the hash fragment
+        window.history.replaceState(null, '', window.location.pathname + window.location.search);
+      }
     });
 
     return () => subscription.unsubscribe();
