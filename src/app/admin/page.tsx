@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -5,15 +6,14 @@ import { ShieldCheck, Mail, CheckCircle } from 'lucide-react';
 import styles from './admin.module.css';
 
 export default function AdminDashboard() {
-  const [orders, setOrders] = useState<any[]>([]);
+  const [orders, setOrders] = useState<any[]>([
+    { id: 'ORD-001', userEmail: 'student@example.com', courseTitle: 'Web Development Mastery', status: 'PENDING', date: '2026-06-11' },
+    { id: 'ORD-002', userEmail: 'another@example.com', courseTitle: '0-100 Complete Cohort', status: 'DELIVERED', date: '2026-06-10' }
+  ]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // Mock fetch orders
-    setOrders([
-      { id: 'ORD-001', userEmail: 'student@example.com', courseTitle: 'Web Development Mastery', status: 'PENDING', date: '2026-06-11' },
-      { id: 'ORD-002', userEmail: 'another@example.com', courseTitle: '0-100 Complete Cohort', status: 'DELIVERED', date: '2026-06-10' }
-    ]);
+    // Component mounted
   }, []);
 
   const handleSendLink = async (order: any) => {
