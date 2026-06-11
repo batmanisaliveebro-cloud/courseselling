@@ -7,6 +7,8 @@ import { useParams, useRouter } from 'next/navigation';
 import { ShieldAlert, CreditCard, Lock, Mail, CheckCircle, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import { supabase } from '@/utils/supabase/client';
+// @ts-expect-error - No types available for Cashfree JS
+import { load } from '@cashfreepayments/cashfree-js';
 import styles from '../checkout.module.css';
 
 const courses = {
@@ -49,15 +51,60 @@ export default function Checkout() {
 
   const handlePayment = async () => {
     setLoading(true);
-    // Simulate API delay for Cashfree integration
-    setTimeout(() => {
+    
+    try {
+      // 1. Initialize Cashfree securely
+      const cashfree = await load({
+        mode: process.env.NODE_ENV === 'production' ? 'production' : 'sandbox'
+      });
+
+      // 2. Call secure backend API to generate payment_session_id
+      const response = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          courseId: course.id,
+          price: course.price,
+          customerEmail: user.email,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.error) {
+        alert("Payment Error: " + data.error);
+        setLoading(false);
+        return;
+      }
+
+      // 3. Open official Cashfree Drop-in Modal
+      const checkoutOptions = {
+        paymentSessionId: data.payment_session_id,
+        redirectTarget: "_modal",
+      };
+
+      // @ts-ignore - The SDK handles the promise
+      cashfree.checkout(checkoutOptions).then((result: any) => {
+        if (result.error) {
+          console.error("Payment failed or modal closed", result.error);
+          setLoading(false);
+        }
+        if (result.paymentDetails) {
+          // 4. Secure Payment Completed
+          setLoading(false);
+          setShowSuccess(true);
+          
+          // Wait for user to read the popup, then redirect
+          setTimeout(() => {
+            router.push('/');
+          }, 3000);
+        }
+      });
+    } catch (err) {
+      console.error(err);
+      alert("Failed to initialize payment gateway.");
       setLoading(false);
-      setShowSuccess(true);
-      // Wait for user to read the popup, then redirect
-      setTimeout(() => {
-        router.push('/');
-      }, 3000);
-    }, 1500);
+    }
   };
 
   if (authLoading || !course) return <div className={styles.loadingScreen}><div className={styles.spinner}></div></div>;
