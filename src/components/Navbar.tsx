@@ -38,7 +38,7 @@ export default function Navbar() {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${window.location.origin}/dashboard`
+          redirectTo: `${window.location.origin}/`
         }
       });
       if (error) throw error;
@@ -67,7 +67,6 @@ export default function Navbar() {
         <div className={styles.navLinks}>
           <Link href="/#courses" className={styles.navLink}>Catalog</Link>
           <Link href="/terms-and-conditions" className={styles.navLink}>Terms</Link>
-          {user && <Link href="/dashboard" className={styles.navLink}>My Courses</Link>}
         </div>
 
         <div className={styles.authButtons}>

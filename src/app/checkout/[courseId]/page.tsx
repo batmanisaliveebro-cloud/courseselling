@@ -55,7 +55,7 @@ export default function Checkout() {
       setShowSuccess(true);
       // Wait for user to read the popup, then redirect
       setTimeout(() => {
-        router.push('/dashboard');
+        router.push('/');
       }, 3000);
     }, 1500);
   };
@@ -159,8 +159,8 @@ export default function Checkout() {
           <div className={styles.successContent}>
             <CheckCircle size={64} color="#10b981" />
             <h2>Payment Successful!</h2>
-            <p>Your course link will be sent to your registered email (<strong>{user.email}</strong>) shortly.</p>
-            <p className={styles.redirectText}>Redirecting to your dashboard...</p>
+            <p>Thanks for purchasing! Your course link will be sent via Gmail to yours shortly.</p>
+            <p className={styles.redirectText}>Redirecting to home page...</p>
           </div>
         </div>
       )}
