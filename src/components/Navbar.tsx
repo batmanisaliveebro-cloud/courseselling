@@ -28,14 +28,16 @@ export default function Navbar() {
 
   const handleLogin = async () => {
     try {
-      await supabase.auth.signInWithOAuth({
+      const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
           redirectTo: `${window.location.origin}/dashboard`
         }
       });
+      if (error) throw error;
     } catch (error) {
       console.error('Error logging in:', error);
+      alert("Authentication configuration is missing or invalid. Please check your Supabase environment variables.");
     }
   };
 
@@ -58,7 +60,7 @@ export default function Navbar() {
         <div className={styles.navLinks}>
           <Link href="/#courses" className={styles.navLink}>Catalog</Link>
           <Link href="/terms-and-conditions" className={styles.navLink}>Terms</Link>
-          {user && <Link href="/dashboard" className={styles.navLink}>Dashboard</Link>}
+          {user && <Link href="/dashboard" className={styles.navLink}>My Courses</Link>}
         </div>
 
         <div className={styles.authButtons}>

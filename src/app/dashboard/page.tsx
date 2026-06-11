@@ -11,12 +11,13 @@ export default function Dashboard() {
   const [purchases, setPurchases] = useState<any[]>([]);
 
   useEffect(() => {
-    // Mock fetch purchases
+    // Mock fetch orders - only show completed (DELIVERED) orders for the student
     setTimeout(() => {
-      // Mock an existing purchase to show the status
-      setPurchases([
-        { id: '1', course_title: 'Web Development Mastery', status: 'PENDING' }
-      ]);
+      const fetchedOrders = [
+        { id: 'ORD-002', course_title: '0-100 Complete Cohort', status: 'DELIVERED', link: 'https://drive.google.com/drive/folders/mock_link' },
+        { id: 'ORD-003', course_title: 'Web Development Mastery', status: 'DELIVERED', link: 'https://drive.google.com/drive/folders/mock_link_2' }
+      ];
+      setPurchases(fetchedOrders);
       setLoading(false);
     }, 1000);
   }, []);
@@ -43,19 +44,13 @@ export default function Dashboard() {
               <div key={p.id} className={styles.purchaseCard}>
                 <div className={styles.purchaseHeader}>
                   <h3>{p.course_title}</h3>
+                  {p.status === 'DELIVERED' && (
+                    <a href={p.link} target="_blank" rel="noreferrer" className={styles.accessBtn}>
+                      Access Course Materials
+                    </a>
+                  )}
                 </div>
                 
-                {p.status === 'PENDING' ? (
-                  <div className={styles.statusPending}>
-                    <Clock size={20} />
-                    <div>
-                      <strong>Order Processing</strong>
-                      <p>Your payment is confirmed. Our team is generating your Google Drive access link. It will be sent to your Gmail shortly.</p>
-                    </div>
-                  </div>
-                ) : (
-                  <div className={styles.statusDelivered}>
-                    <CheckCircle size={20} />
                     <div>
                       <strong>Access Granted</strong>
                       <p>Please check your registered Gmail inbox for the Google Drive link.</p>

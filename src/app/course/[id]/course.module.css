@@ -107,6 +107,17 @@
   cursor: not-allowed;
 }
 
+.authErrorBox {
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
+  padding: 1rem 1.25rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  width: 100%;
+}
+
 .guaranteeBlock {
   display: flex;
   gap: 1.5rem;

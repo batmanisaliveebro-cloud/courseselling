@@ -22,6 +22,7 @@ export default function Checkout() {
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [authLoading, setAuthLoading] = useState(true);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   useEffect(() => {
     const initCheckout = async () => {
@@ -46,12 +47,14 @@ export default function Checkout() {
 
   const handlePayment = async () => {
     setLoading(true);
-    // Placeholder for Cashfree Integration
-    alert("Cashfree integration triggered. Simulating successful payment...");
-    // Simulate API delay
+    // Simulate API delay for Cashfree integration
     setTimeout(() => {
-      router.push('/dashboard');
       setLoading(false);
+      setShowSuccess(true);
+      // Wait for user to read the popup, then redirect
+      setTimeout(() => {
+        router.push('/dashboard');
+      }, 3000);
     }, 1500);
   };
 
@@ -147,8 +150,18 @@ export default function Checkout() {
             </div>
           </div>
         </div>
-
       </div>
+
+      {showSuccess && (
+        <div className={styles.successModal}>
+          <div className={styles.successContent}>
+            <CheckCircle size={64} color="#10b981" />
+            <h2>Payment Successful!</h2>
+            <p>Your course link will be sent to your registered email (<strong>{user.email}</strong>) shortly.</p>
+            <p className={styles.redirectText}>Redirecting to your dashboard...</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

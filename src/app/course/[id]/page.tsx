@@ -79,6 +79,7 @@ export default function CourseDetails() {
   const [expandedModule, setExpandedModule] = useState<number | null>(0);
   const [user, setUser] = useState<any>(null);
   const [authLoading, setAuthLoading] = useState(true);
+  const [authError, setAuthError] = useState<string | null>(null);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -93,18 +94,21 @@ export default function CourseDetails() {
 
   const handleEnrollClick = async () => {
     if (authLoading) return;
+    setAuthError(null);
     
     if (!user) {
       // Trigger Supabase Login if not authenticated
       try {
-        await supabase.auth.signInWithOAuth({
+        const { error } = await supabase.auth.signInWithOAuth({
           provider: 'google',
           options: {
             redirectTo: `${window.location.origin}/checkout/${id}`
           }
         });
-      } catch (error) {
+        if (error) throw error;
+      } catch (error: any) {
         console.error('Error logging in:', error);
+        setAuthError("Authentication configuration is missing or invalid. Please check your Supabase environment variables.");
       }
     } else {
       router.push(`/checkout/${id}`);
@@ -135,6 +139,11 @@ export default function CourseDetails() {
               >
                 {authLoading ? 'Verifying...' : user ? `Enroll Now - ₹${course.price.toLocaleString('en-IN')}` : `Sign In to Enroll - ₹${course.price.toLocaleString('en-IN')}`}
               </button>
+              {authError && (
+                <div className={styles.authErrorBox}>
+                  <strong>Error:</strong> {authError}
+                </div>
+              )}
               <div className={styles.guaranteeBlock}>
                 <p className={styles.deliveryNote}><Check size={14}/> Lifetime Access</p>
                 <p className={styles.deliveryNote}><Check size={14}/> Google Drive Delivery</p>
