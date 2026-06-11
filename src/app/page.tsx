@@ -1,65 +1,119 @@
-import Image from "next/image";
+"use client";
+
+import Image from 'next/image';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { CheckCircle, ShieldAlert } from 'lucide-react';
+import styles from './page.module.css';
+
+const courses = [
+  {
+    id: 'web-dev',
+    title: 'Web Development Mastery',
+    price: 5000,
+    image: '/web_dev_1781175330631.png',
+    description: 'Master full-stack web development with modern technologies.'
+  },
+  {
+    id: 'devops',
+    title: 'DevOps Engineering',
+    price: 10000,
+    image: '/devops_1781175341070.png',
+    description: 'Learn cloud infrastructure, CI/CD, Docker, and Kubernetes.'
+  },
+  {
+    id: 'blockchain',
+    title: 'Blockchain & Web3',
+    price: 20000,
+    image: '/blockchain_1781175359687.png',
+    description: 'Build decentralized applications and master smart contracts.'
+  },
+  {
+    id: 'cohort',
+    title: '0-100 Complete Cohort',
+    price: 30000,
+    image: '/full_cohort_1781175453421.png',
+    description: 'The ultimate zero to hero programming bootcamp.'
+  },
+  {
+    id: 'spring-boot',
+    title: 'Java Spring Boot',
+    price: 50000,
+    image: '/spring_boot_1781175465886.png',
+    description: 'Enterprise-grade backend development with Java.'
+  }
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className={styles.main}>
+      <section className={styles.hero}>
+        <div className={`container ${styles.heroContainer}`}>
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className={styles.heroContent}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <h1 className={styles.title}>
+              Level Up Your <span className={styles.highlight}>Tech Career</span> Today
+            </h1>
+            <p className={styles.subtitle}>
+              Premium courses designed by industry experts to get you hired. 
+              Start learning the most in-demand skills in tech.
+            </p>
+            <div className={styles.ctaGroup}>
+              <a href="#courses" className={styles.primaryBtn}>Explore Courses</a>
+            </div>
+            
+            <div className={styles.trustBadges}>
+              <div className={styles.badge}><CheckCircle size={16}/> Lifetime Access</div>
+              <div className={styles.badge}><CheckCircle size={16}/> Industry Projects</div>
+            </div>
+          </motion.div>
         </div>
-      </main>
+      </section>
+
+      <section id="courses" className={styles.coursesSection}>
+        <div className="container">
+          <div className={styles.sectionHeader}>
+            <h2>Premium Cohorts</h2>
+            <p>Choose your path to mastery.</p>
+            
+            <div className="non-refundable-banner">
+              <ShieldAlert size={20} />
+              <span>ALL PURCHASES ARE STRICTLY NON-REFUNDABLE</span>
+            </div>
+          </div>
+
+          <div className={styles.courseGrid}>
+            {courses.map((course, idx) => (
+              <motion.div 
+                key={course.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                className={styles.courseCard}
+              >
+                <div className={styles.imageWrapper}>
+                  <Image src={course.image} alt={course.title} fill style={{ objectFit: 'cover' }} />
+                </div>
+                <div className={styles.cardContent}>
+                  <h3>{course.title}</h3>
+                  <p>{course.description}</p>
+                  <div className={styles.cardFooter}>
+                    <span className={styles.price}>₹{course.price.toLocaleString('en-IN')}</span>
+                    <Link href={`/checkout/${course.id}`} className={styles.buyBtn}>
+                      Buy Now
+                    </Link>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
