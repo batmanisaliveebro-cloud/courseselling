@@ -63,7 +63,7 @@ export default function Checkout() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          courseId: course.id,
+          courseId: courseId, // use the param from the URL
           price: course.price,
           customerEmail: user.email,
         }),

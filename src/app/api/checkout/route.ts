@@ -12,6 +12,7 @@ const CASHFREE_URL = isProduction
 
 export async function POST(req: Request) {
   try {
+    const origin = req.headers.get('origin') || process.env.NEXT_PUBLIC_SITE_URL || 'https://courseselling-three.vercel.app';
     const body = await req.json();
     const { courseId, price, customerEmail, customerPhone = '9999999999', customerId = 'user_123' } = body;
 
@@ -31,7 +32,7 @@ export async function POST(req: Request) {
           customer_email: customerEmail,
         },
         order_meta: {
-          return_url: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/checkout/${courseId}?order_id={order_id}`,
+          return_url: `${origin}/checkout/${courseId}?order_id={order_id}`,
         },
       },
       {
