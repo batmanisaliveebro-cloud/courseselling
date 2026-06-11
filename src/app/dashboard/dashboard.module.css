@@ -1,5 +1,6 @@
 .dashboardContainer {
   padding: 4rem 0;
+  min-height: calc(100vh - 140px);
 }
 
 .pageTitle {
@@ -36,23 +37,23 @@
 }
 
 .primaryBtn {
-  background-color: var(--primary);
-  color: white;
+  background-color: #ffffff;
+  color: #000000;
   padding: 0.75rem 2rem;
-  border-radius: 99px;
+  border-radius: 4px;
   font-weight: 600;
   margin-top: 1rem;
-  transition: all 0.2s ease;
+  transition: all 0.2s;
 }
 
 .primaryBtn:hover {
-  background-color: var(--primary-hover);
+  background-color: #f4f4f5;
   transform: translateY(-2px);
 }
 
 .coursesGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   gap: 2rem;
 }
 
@@ -61,33 +62,41 @@
   border: 1px solid var(--card-border);
   border-radius: var(--radius);
   padding: 2rem;
-  box-shadow: var(--shadow-sm);
 }
 
 .purchaseHeader {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.purchaseHeader h3 {
+  font-size: 1.25rem;
+}
+
+.statusPending, .statusDelivered {
   display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 1rem;
-}
-
-.unlockedIcon {
-  color: var(--success);
-}
-
-.accessBtn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background-color: var(--success);
-  color: white;
-  padding: 0.75rem 1.5rem;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.5rem;
   border-radius: var(--radius);
-  font-weight: 600;
-  margin-top: 1.5rem;
-  transition: background-color 0.2s;
 }
 
-.accessBtn:hover {
-  background-color: #059669;
+.statusPending {
+  background-color: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  color: #fcd34d;
+}
+
+.statusPending p, .statusDelivered p {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  margin-top: 0.5rem;
+  line-height: 1.5;
+}
+
+.statusDelivered {
+  background-color: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  color: #34d399;
 }

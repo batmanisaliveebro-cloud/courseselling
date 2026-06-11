@@ -1,32 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;700;800&display=swap');
 
 :root {
-  --background: #f8fafc;
-  --foreground: #0f172a;
+  --background: #000000;
+  --foreground: #ffffff;
   
-  --primary: #4f46e5;
-  --primary-hover: #4338ca;
-  --primary-light: #e0e7ff;
+  --primary: #ffffff;
+  --primary-hover: #e4e4e7;
   
-  --secondary: #0ea5e9;
+  --card-bg: #09090b;
+  --card-border: #27272a;
   
-  --card-bg: #ffffff;
-  --card-border: #e2e8f0;
-  
-  --text-muted: #64748b;
-  --text-dark: #1e293b;
+  --text-muted: #a1a1aa;
+  --text-dark: #ffffff;
   
   --success: #10b981;
   --danger: #ef4444;
-  --danger-light: #fee2e2;
-  --danger-dark: #b91c1c;
+  --danger-light: rgba(239, 68, 68, 0.1);
+  --danger-dark: #ef4444;
 
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.5);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.5);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.5), 0 8px 10px -6px rgb(0 0 0 / 0.5);
   
-  --radius: 1rem;
+  --radius: 8px; /* MNC sharper corners */
 }
 
 * {
@@ -64,24 +60,10 @@ button {
 }
 
 .container {
-  max-width: 1280px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
 }
-
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.8s ease-out forwards;
-}
-
-.animate-delay-1 { animation-delay: 0.1s; }
-.animate-delay-2 { animation-delay: 0.2s; }
-.animate-delay-3 { animation-delay: 0.3s; }
 
 /* Non-Refundable Banner */
 .non-refundable-banner {

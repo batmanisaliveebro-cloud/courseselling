@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { ShieldAlert, CreditCard, Lock } from 'lucide-react';
+import { ShieldAlert, CreditCard, Lock, Mail } from 'lucide-react';
 import styles from '../checkout.module.css';
 
 const courses = {
@@ -30,10 +30,8 @@ export default function Checkout() {
   const handlePayment = async () => {
     setLoading(true);
     // Placeholder for Cashfree Integration
-    // 1. Call /api/checkout to get payment session id
-    // 2. Load Cashfree JS SDK and open payment modal
-    // 3. On success, verify webhook and grant access
-    alert("Cashfree integration will trigger here once configured.");
+    alert("Cashfree integration will trigger here. Once successful, order goes to Admin for confirmation.");
+    router.push('/dashboard');
     setLoading(false);
   };
 
@@ -43,16 +41,12 @@ export default function Checkout() {
     <div className={styles.checkoutWrapper}>
       <div className={`container ${styles.checkoutContainer}`}>
         <div className={styles.checkoutDetails}>
-          <h1>Complete Your Purchase</h1>
+          <h1>Complete Your Order</h1>
           
           <div className={styles.orderSummary}>
             <div className={styles.summaryRow}>
               <span>Course</span>
               <span className={styles.highlight}>{course.title}</span>
-            </div>
-            <div className={styles.summaryRow}>
-              <span>Lifetime Access</span>
-              <span>Included</span>
             </div>
             <div className={styles.summaryDivider}></div>
             <div className={styles.summaryRowTotal}>
@@ -61,11 +55,16 @@ export default function Checkout() {
             </div>
           </div>
 
+          <div className={styles.emailNotice}>
+            <Mail size={24} style={{ margin: '0 auto 0.5rem' }} />
+            <p>Your Google Drive access link will be provided to your <strong>registered Gmail address</strong> once the order is confirmed by our team.</p>
+          </div>
+
           <div className={styles.nonRefundableAlert}>
             <ShieldAlert size={32} />
             <div>
               <h2>STRICTLY NON-REFUNDABLE</h2>
-              <p>By proceeding with this payment, you acknowledge that this purchase is final and cannot be refunded under any circumstances.</p>
+              <p>By proceeding with this payment, you acknowledge that this digital purchase is final and cannot be refunded under any circumstances.</p>
             </div>
           </div>
 

@@ -3,8 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './dashboard.module.css';
-import { Lock, Unlock, ExternalLink } from 'lucide-react';
-import { supabase } from '@/utils/supabase/client';
+import { Clock, CheckCircle, Package } from 'lucide-react';
 
 export default function Dashboard() {
   const router = useRouter();
@@ -12,42 +11,27 @@ export default function Dashboard() {
   const [purchases, setPurchases] = useState<any[]>([]);
 
   useEffect(() => {
-    // In a real app, this would check Supabase Auth Session
-    // and fetch purchases from the DB.
-    // For now, we simulate a logged in user with 0 purchases if they just signed in.
-    
-    const fetchPurchases = async () => {
-      try {
-        // const { data: session } = await supabase.auth.getSession();
-        // if (!session?.session) router.push('/');
-        
-        // Mock data fetch
-        setTimeout(() => {
-          setPurchases([]);
-          setLoading(false);
-        }, 1000);
-      } catch (error) {
-        console.error(error);
-        setLoading(false);
-      }
-    };
-    
-    fetchPurchases();
-  }, [router]);
+    // Mock fetch purchases
+    setTimeout(() => {
+      // Mock an existing purchase to show the status
+      setPurchases([
+        { id: '1', course_title: 'Web Development Mastery', status: 'PENDING' }
+      ]);
+      setLoading(false);
+    }, 1000);
+  }, []);
 
-  if (loading) {
-    return <div className={styles.loading}>Loading your learning hub...</div>;
-  }
+  if (loading) return <div className={styles.loading}>Loading your learning hub...</div>;
 
   return (
     <div className={styles.dashboardContainer}>
       <div className="container">
-        <h1 className={styles.pageTitle}>My Dashboard</h1>
+        <h1 className={styles.pageTitle}>My Orders</h1>
         
         {purchases.length === 0 ? (
           <div className={styles.emptyState}>
-            <Lock size={48} className={styles.emptyIcon} />
-            <h2>No courses purchased yet</h2>
+            <Package size={48} className={styles.emptyIcon} />
+            <h2>No orders yet</h2>
             <p>Ready to level up? Explore our premium cohorts and start your journey.</p>
             <button onClick={() => router.push('/#courses')} className={styles.primaryBtn}>
               Browse Courses
@@ -58,13 +42,26 @@ export default function Dashboard() {
             {purchases.map(p => (
               <div key={p.id} className={styles.purchaseCard}>
                 <div className={styles.purchaseHeader}>
-                  <Unlock size={20} className={styles.unlockedIcon} />
                   <h3>{p.course_title}</h3>
                 </div>
-                <p>Status: Active Lifetime Access</p>
-                <a href={p.drive_link} target="_blank" rel="noopener noreferrer" className={styles.accessBtn}>
-                  Access Materials <ExternalLink size={16} />
-                </a>
+                
+                {p.status === 'PENDING' ? (
+                  <div className={styles.statusPending}>
+                    <Clock size={20} />
+                    <div>
+                      <strong>Order Processing</strong>
+                      <p>Your payment is confirmed. Our team is generating your Google Drive access link. It will be sent to your Gmail shortly.</p>
+                    </div>
+                  </div>
+                ) : (
+                  <div className={styles.statusDelivered}>
+                    <CheckCircle size={20} />
+                    <div>
+                      <strong>Access Granted</strong>
+                      <p>Please check your registered Gmail inbox for the Google Drive link.</p>
+                    </div>
+                  </div>
+                )}
               </div>
             ))}
           </div>
