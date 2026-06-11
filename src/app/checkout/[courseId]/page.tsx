@@ -55,7 +55,7 @@ export default function Checkout() {
     try {
       // 1. Initialize Cashfree securely
       const cashfree = await load({
-        mode: process.env.NODE_ENV === 'production' ? 'production' : 'sandbox'
+        mode: process.env.NEXT_PUBLIC_CASHFREE_ENVIRONMENT === 'production' ? 'production' : 'sandbox'
       });
 
       // 2. Call secure backend API to generate payment_session_id
@@ -72,7 +72,8 @@ export default function Checkout() {
       const data = await response.json();
 
       if (data.error) {
-        alert("Payment Error: " + data.error);
+        console.error("Full Cashfree Error:", data.details);
+        alert(`Payment Error: ${data.error}\nDetails: ${JSON.stringify(data.details)}`);
         setLoading(false);
         return;
       }
