@@ -16,19 +16,33 @@ export async function POST(req: Request) {
     }
 
     const { data, error } = await resend.emails.send({
-      from: 'CourseHub <noreply@yourdomain.com>',
+      from: 'CourseHub <onboarding@resend.dev>', // Change to your verified domain for production
       to: [userEmail],
       subject: `Your access to ${courseTitle} is ready!`,
       html: `
-        <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2>Order Confirmed!</h2>
-          <p>Thank you for purchasing <strong>${courseTitle}</strong>.</p>
-          <p>Your Google Drive access link is ready. Please click the button below to access your course materials. Remember, this link is for your personal use only.</p>
-          <div style="text-align: center; margin: 30px 0;">
-            <a href="${driveLink}" style="background-color: #000000; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 4px; font-weight: bold;">Access Course Materials</a>
+        <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #ffffff; border: 1px solid #eaeaea; border-radius: 8px; overflow: hidden;">
+          <div style="background-color: #000000; padding: 30px; text-align: center;">
+            <h1 style="color: #ffffff; margin: 0; font-size: 24px; letter-spacing: 1px;">CourseHub</h1>
           </div>
-          <p>If you have any issues, reply to this email.</p>
-          <p>Best regards,<br/>The CourseHub Team</p>
+          <div style="padding: 40px 30px;">
+            <h2 style="color: #111827; font-size: 20px; margin-top: 0;">Your Course is Ready!</h2>
+            <p style="color: #4b5563; font-size: 16px; line-height: 1.6;">Hello,</p>
+            <p style="color: #4b5563; font-size: 16px; line-height: 1.6;">Your exclusive access to <strong>${courseTitle}</strong> has been granted. You can now access all premium modules, resources, and materials via the secure Google Drive link below.</p>
+            
+            <div style="text-align: center; margin: 40px 0;">
+              <a href="${driveLink}" style="background-color: #10b981; color: #ffffff; padding: 16px 32px; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 16px; display: inline-block;">Access Course Materials</a>
+            </div>
+            
+            <p style="color: #6b7280; font-size: 14px; border-left: 4px solid #e5e7eb; padding-left: 15px; margin-bottom: 30px;">
+              <strong>Note:</strong> This link is strictly tied to your registered email address. Do not share this link with anyone else as it may result in an automated ban.
+            </p>
+            
+            <p style="color: #4b5563; font-size: 14px;">Happy learning!</p>
+            <p style="color: #4b5563; font-size: 14px; margin-top: 5px;">- The CourseHub Team</p>
+          </div>
+          <div style="background-color: #f3f4f6; padding: 20px; text-align: center; border-top: 1px solid #eaeaea;">
+            <p style="color: #9ca3af; font-size: 12px; margin: 0;">© ${new Date().getFullYear()} CourseHub Inc. All rights reserved.</p>
+          </div>
         </div>
       `,
     });

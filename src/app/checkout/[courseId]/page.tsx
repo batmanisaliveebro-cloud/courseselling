@@ -85,13 +85,29 @@ export default function Checkout() {
       };
 
       // @ts-ignore - The SDK handles the promise
-      cashfree.checkout(checkoutOptions).then((result: any) => {
+      cashfree.checkout(checkoutOptions).then(async (result: any) => {
         if (result.error) {
           console.error("Payment failed or modal closed", result.error);
           setLoading(false);
         }
         if (result.paymentDetails) {
           // 4. Secure Payment Completed
+          
+          // 5. Send Automated Receipt Email
+          try {
+            await fetch('/api/send-receipt', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                userEmail: user.email,
+                courseTitle: course.title,
+                price: course.price
+              })
+            });
+          } catch (e) {
+            console.error("Failed to send receipt:", e);
+          }
+
           setLoading(false);
           setShowSuccess(true);
           
