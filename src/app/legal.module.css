@@ -1,70 +1,80 @@
 .container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 4rem 2rem;
+  max-width: 900px;
+  margin: 4rem auto;
+  padding: 4rem;
   background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
   border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
-  margin-top: 2rem;
-  margin-bottom: 2rem;
 }
 
 .title {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
   color: var(--text-dark);
+  letter-spacing: -0.02em;
 }
 
 .lastUpdated {
   color: var(--text-muted);
-  font-size: 0.9rem;
-  margin-bottom: 3rem;
+  font-size: 0.95rem;
+  margin-bottom: 4rem;
   display: block;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .content h2 {
-  font-size: 1.5rem;
-  margin-top: 2.5rem;
-  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  margin-top: 3.5rem;
+  margin-bottom: 1.5rem;
   color: var(--text-dark);
+  border-bottom: 1px solid var(--card-border);
+  padding-bottom: 0.5rem;
 }
 
 .content p {
-  color: var(--text-muted);
-  line-height: 1.7;
-  margin-bottom: 1rem;
+  color: #d4d4d8;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  font-size: 1.05rem;
 }
 
 .content ul {
-  margin-left: 1.5rem;
-  margin-bottom: 1.5rem;
-  color: var(--text-muted);
+  margin-left: 2rem;
+  margin-bottom: 2rem;
+  color: #d4d4d8;
 }
 
 .content li {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
   line-height: 1.6;
+  font-size: 1.05rem;
 }
 
 .nonRefundableAlert {
-  background-color: var(--danger-light);
-  border: 2px solid var(--danger);
-  border-radius: var(--radius);
+  background-color: rgba(239, 68, 68, 0.05);
+  border-left: 4px solid var(--danger);
   padding: 2rem;
-  margin: 2rem 0;
-  text-align: center;
+  margin: 3rem 0;
 }
 
 .nonRefundableAlert h3 {
-  color: var(--danger-dark);
-  font-size: 1.8rem;
-  margin-bottom: 0.5rem;
+  color: var(--danger);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
   text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .nonRefundableAlert p {
-  color: var(--danger-dark);
+  color: #fca5a5;
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: 500;
   margin: 0;
+}
+
+@media (max-width: 768px) {
+  .container { padding: 2rem; margin: 2rem auto; }
+  .title { font-size: 2.5rem; }
 }

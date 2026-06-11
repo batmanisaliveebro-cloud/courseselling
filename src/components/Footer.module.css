@@ -1,20 +1,20 @@
 .footer {
-  background-color: var(--card-bg);
-  border-top: 1px solid var(--card-border);
-  padding-top: 4rem;
-  margin-top: 4rem;
+  background-color: #000000;
+  border-top: 1px solid #27272a;
+  padding-top: 5rem;
+  color: #a1a1aa;
 }
 
 .footerContainer {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 2rem;
-  margin-bottom: 3rem;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 4rem;
+  margin-bottom: 4rem;
 }
 
-.footerBrand {
-  max-width: 300px;
+.footerColumn {
+  display: flex;
+  flex-direction: column;
 }
 
 .logo {
@@ -22,56 +22,135 @@
   align-items: center;
   gap: 0.5rem;
   font-weight: 800;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-family: 'Outfit', sans-serif;
-  color: var(--text-dark);
-  margin-bottom: 1rem;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
 }
 
 .tagline {
-  color: var(--text-muted);
   line-height: 1.6;
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+  max-width: 300px;
 }
 
-.footerLinks {
+.socialLinks {
   display: flex;
-  gap: 4rem;
+  gap: 1rem;
 }
 
-.linkGroup h3 {
+.socialLinks a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #18181b;
+  color: #a1a1aa;
+  transition: all 0.2s;
+}
+
+.socialLinks a:hover {
+  background-color: #ffffff;
+  color: #000000;
+  transform: translateY(-2px);
+}
+
+.footerColumn h3 {
+  color: #ffffff;
   font-size: 1.1rem;
+  font-weight: 600;
   margin-bottom: 1.5rem;
-  color: var(--text-dark);
+  font-family: 'Inter', sans-serif;
 }
 
-.linkGroup a {
+.footerColumn a {
   display: block;
-  color: var(--text-muted);
-  margin-bottom: 0.75rem;
-  transition: color 0.2s ease;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  transition: color 0.2s;
 }
 
-.linkGroup a:hover {
-  color: var(--primary);
+.footerColumn a:hover {
+  color: #ffffff;
 }
 
-.nonRefundableBadge {
-  display: inline-block;
-  margin-top: 1rem;
-  padding: 0.25rem 0.75rem;
-  background-color: var(--danger-light);
-  color: var(--danger-dark);
-  font-size: 0.75rem;
-  font-weight: 700;
-  border-radius: 99px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+.newsletterText {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.newsletterForm {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.newsletterForm input {
+  flex-grow: 1;
+  background-color: #09090b;
+  border: 1px solid #27272a;
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  color: #ffffff;
+  outline: none;
+  font-family: inherit;
+}
+
+.newsletterForm input:focus {
+  border-color: #52525b;
+}
+
+.newsletterForm button {
+  background-color: #ffffff;
+  color: #000000;
+  padding: 0 1.25rem;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.newsletterForm button:hover {
+  background-color: #e4e4e7;
 }
 
 .footerBottom {
-  border-top: 1px solid var(--card-border);
-  padding: 1.5rem 0;
-  text-align: center;
-  color: var(--text-muted);
-  font-size: 0.9rem;
+  border-top: 1px solid #18181b;
+  padding: 2rem 0;
+  font-size: 0.85rem;
+}
+
+.bottomContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.bottomLinks span {
+  color: #ef4444;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 1024px) {
+  .footerContainer {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .footerContainer {
+    grid-template-columns: 1fr;
+  }
+  .bottomContainer {
+    flex-direction: column;
+    text-align: center;
+  }
 }

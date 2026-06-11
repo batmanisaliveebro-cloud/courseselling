@@ -1,10 +1,10 @@
 .navbar {
-  background-color: var(--card-bg);
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--card-border);
   position: sticky;
   top: 0;
   z-index: 50;
-  box-shadow: var(--shadow-sm);
 }
 
 .navContainer {
@@ -24,28 +24,20 @@
   color: var(--text-dark);
 }
 
-.logoIcon {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .navLinks {
   display: flex;
-  gap: 2rem;
+  gap: 2.5rem;
 }
 
 .navLink {
   color: var(--text-muted);
   font-weight: 500;
+  font-size: 0.95rem;
   transition: color 0.2s ease;
 }
 
 .navLink:hover {
-  color: var(--primary);
+  color: #ffffff;
 }
 
 .authButtons {
@@ -53,34 +45,67 @@
   align-items: center;
 }
 
-.loginBtn, .logoutBtn {
+.loginBtn {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.5rem 1.25rem;
-  border-radius: var(--radius);
+  padding: 0.6rem 1.25rem;
+  border-radius: 4px;
   font-weight: 600;
   font-size: 0.95rem;
+  background-color: #ffffff;
+  color: #000000;
   transition: all 0.2s ease;
 }
 
-.loginBtn {
-  background-color: var(--primary);
-  color: white;
-}
-
 .loginBtn:hover {
-  background-color: var(--primary-hover);
-  box-shadow: var(--shadow-md);
+  background-color: #f4f4f5;
   transform: translateY(-1px);
 }
 
+.userMenu {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.userEmail {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #a1a1aa;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
 .logoutBtn {
-  background-color: transparent;
-  border: 1px solid var(--card-border);
-  color: var(--text-dark);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #a1a1aa;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.2s;
 }
 
 .logoutBtn:hover {
-  background-color: var(--background);
+  color: #ffffff;
+}
+
+.loadingPulse {
+  width: 100px;
+  height: 36px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #18181b 0%, #27272a 50%, #18181b 100%);
+  background-size: 200% 100%;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@media (max-width: 768px) {
+  .navLinks { display: none; }
 }
