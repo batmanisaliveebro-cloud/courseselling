@@ -5,9 +5,9 @@ import axios from 'axios';
 const CASHFREE_APP_ID = process.env.CASHFREE_APP_ID;
 const CASHFREE_SECRET_KEY = process.env.CASHFREE_SECRET_KEY;
 // Use sandbox for dev, change to https://api.cashfree.com/pg/orders for production
-// HARDCODED to sandbox to allow testing without KYC approval
-const isProduction = false; 
-const CASHFREE_URL = 'https://sandbox.cashfree.com/pg/orders';
+// HARDCODED to REAL PRODUCTION mode as requested by user
+const isProduction = true; 
+const CASHFREE_URL = 'https://api.cashfree.com/pg/orders';
 
 export async function POST(req: Request) {
   try {
