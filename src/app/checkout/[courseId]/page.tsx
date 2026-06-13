@@ -55,7 +55,7 @@ export default function Checkout() {
     try {
       // 1. Initialize Cashfree securely
       const cashfree = await load({
-        mode: process.env.NEXT_PUBLIC_CASHFREE_ENVIRONMENT === 'production' ? 'production' : 'sandbox'
+        mode: 'sandbox' // HARDCODED for testing without KYC
       });
 
       // 2. Call secure backend API to generate payment_session_id
